@@ -1,2 +1,20 @@
+# Ignore README file
+README.md
+
+# Ignore vendor directory created by Composer
+/vendor/
+
+# Ignore environment file
 .env
 
+# Ignore any log files
+*.log
+
+# Ignore DS_Store files on macOS
+.DS_Store
+
+# Ignore .idea directory for JetBrains IDE
+.idea/
+
+# Ignore .vscode directory for Visual Studio Code
+.vscode/
