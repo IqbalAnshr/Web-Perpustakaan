@@ -1,0 +1,14 @@
+{
+  "name": "web-perpustakaan",
+  "version": "1.0.0",
+  "description": "Web App ini dikembangkan sebagai bagian dari tugas mata kuliah Web Programming untuk memenuhi kebutuhan aplikasi perpustakaan online yang memungkinkan pengguna untuk meminjam buku.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}

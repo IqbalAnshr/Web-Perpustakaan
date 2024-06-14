@@ -4,6 +4,9 @@ README.md
 # Ignore vendor directory created by Composer
 /vendor/
 
+# Ignore vendor directory created by npm
+/node_modules/
+
 # Ignore environment file
 .env
 
@@ -18,4 +21,3 @@ README.md
 
 # Ignore .vscode directory for Visual Studio Code
 .vscode/
- 
