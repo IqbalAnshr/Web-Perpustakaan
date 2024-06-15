@@ -1,0 +1,291 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f5f5f5;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+
+
+#navbar_top {
+  background-color: rgba(0, 0, 0, 0);
+  position: fixed;
+  z-index: 999;
+  width: 100%; /* Ensure navbar spans full width */
+}
+
+#navbar_top.fixed-top {
+  position: fixed;
+  top: -40px;
+  color: #000;
+}
+
+#navbar_top.fixed-top .navbar-collapse ul li a {
+  color: #000;
+}
+
+.fixed-top {
+  background-color: #ffffff !important;
+  top: 0; /* Ensure navbar starts at the top */
+  transition: transform 0.3s;
+}
+
+.fixed-top {
+  position: fixed;
+  z-index: 999;
+  transform: translateY(40px);
+  transition: transform 0.3s;
+}
+
+.navbar-brand {
+  display: none;
+}
+.fixed-top .navbar-brand {
+  display: block;
+}
+
+.nav-phone {
+  display: block;
+}
+.fixed-top .nav-phone {
+  display: none !important;
+}
+
+.fixed-top .navbar-brand img {
+  width: 150px;
+  color: #fff;
+}
+.navbar-nav .nav-item,
+.navbar-nav .nav-item a {
+  color: #fff;
+}
+
+.navbar-nav .nav-item,
+.navbar-nav .dropdown ul a {
+  color: #000000;
+}
+
+/* Default styling for toggler icon */
+.navbar-toggler {
+  padding: 0.25rem 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background-color: rgba(237, 237, 237, 0.24);
+  border: 1px solid rgb(252, 252, 252);
+  border-radius: 0.25rem;
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.mobile-tool-bar {
+  display: none;
+  font-size: 36px;
+  height: 100px;
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.5) 46%,
+      rgba(0, 0, 0, 0.8) 100%
+    ),
+    url("../images/hero_bg.jpg");
+  background-repeat: no-repeat !important;
+  background-position: bottom left;
+  background-size: cover !important;
+}
+
+.search-section {
+  height: 45vh;
+}
+
+.hero h1 {
+  color: #fff; /* Warna teks putih */
+  font-size: 3rem; /* Ukuran font */
+  font-weight: 700; /* Ketebalan font */
+  text-shadow: 0 0 20px rgba(255, 255, 0, 0.928); /* Efek bayangan teks kuning */
+  margin: 50px 0;
+}
+
+.input-group {
+  position: relative;
+  width: 300px; /* Sesuaikan lebar input sesuai kebutuhan Anda */
+}
+
+.input-group input[type="search"] {
+  border: none; /* Menghilangkan border input */
+  border-radius: 10px 0 0 10px; /* Mengatur sudut bulat di sebelah kiri */
+  padding: 10px 15px;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Warna latar belakang hitam dengan opasitas 0.5 */
+  color: #fff; /* Warna teks putih */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Efek bayangan putih */
+}
+
+.input-group input[type="search"]::placeholder {
+  color: rgba(255, 255, 255, 0.5); /* Warna placeholder */
+}
+
+.input-group button {
+  border: none; /* Menghilangkan border tombol */
+  border-radius: 0 10px 10px 0; /* Mengatur sudut bulat di sebelah kanan */
+  padding: 10px 15px;
+  background-color: #007bff00; /* Warna latar belakang tombol */
+  color: #fff; /* Warna teks putih */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.input-group button:hover {
+  background-color: #0056b3; /* Warna latar belakang tombol saat dihover */
+}
+
+.input-group input[type="search"]:focus {
+  outline: none; /* Menghilangkan outline saat input di-focus */
+}
+
+.input-group button:focus {
+  outline: none; /* Menghilangkan outline saat tombol di-focus */
+}
+
+.book-section {
+  margin-top: 50px 0; /* Jarak antara input pencarian dan bagian rekomendasi buku */
+}
+
+.book-section h2 {
+  font-size: 24px; /* Ukuran font judul */
+  font-weight: 700; /* Ketebalan font */
+  margin-bottom: 20px; /* Jarak bawah judul dan bagian rekomendasi buku */
+  color: #fff; /* Warna teks putih */
+  height: auto;
+}
+
+/* .list-books {
+    overflow-y: hidden;
+    overflow-x: auto;
+    width: 100%;
+    white-space: nowrap; 
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+} */
+
+
+.card {
+  position: relative;
+  border: none;
+  background-color: transparent;
+  transition: transform 0.2s;
+  max-width: 200px;
+  max-height: 300px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card .detail-btn {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.card:hover .detail-btn {
+  opacity: 1;
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 100%; 
+  width: 100%;
+}
+
+.card-img-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 0.6rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.overlay-content {
+  position: relative;
+  z-index: 1;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Aligment konten di bagian bawah */
+  height: 100%; /* Agar konten mengisi tinggi card */
+}
+
+.btn-primary {
+  font-size: 0.875rem; /* Ukuran font tombol */
+  padding: 0.375rem 0.75rem;
+}
+
+@media (max-width: 1399px) {
+}
+/* Large devices (desktops, less than 1200px)*/
+@media (max-width: 1199.98px) {
+}
+
+/*// Medium devices (tablets, less than 992px)*/
+@media (max-width: 991.98px) {
+  .navbar-nav .nav-item,
+  .navbar-nav .nav-item a {
+    color: #000;
+  }
+
+  .fixed-top .navbar-nav .nav-item,
+  .fixed-top .navbar-nav .nav-item a {
+    color: #000000 !important;
+  }
+  .hide-mobile {
+    display: none;
+  }
+
+  #navbar_top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  #navbar_top .navbar-collapse.show {
+    padding: 0 10px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+  }
+
+  #navbar_top.fixed-top {
+    position: fixed;
+    top: -40px;
+  }
+  #navbar_top.fixed-top .navbar-collapse.show {
+    padding: 0;
+    background: transparent;
+  }
+
+  .hero h1{
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+}
+
+@media (max-width: 575.98px) {
+}

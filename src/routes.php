@@ -1,10 +1,11 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../config/koneksi.php';
 
 use App\Controllers\HomeController;
 
-$homeController = new HomeController();
+$homeController = new HomeController($conn);
 
 if ($_SERVER['REQUEST_URI'] === '/') {
     $homeController->index();
