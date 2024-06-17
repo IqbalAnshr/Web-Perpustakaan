@@ -3,11 +3,14 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../config/koneksi.php';
 
+
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
+use App\Controllers\BookController;
 
 $homeController = new HomeController($conn);
 $authController = new AuthController($conn);
+$bookController = new BookController($conn);
 
 
 $routes = [
@@ -36,6 +39,19 @@ $routes = [
             include __DIR__ . '/views/admin/dashboard.php';
         }
     ],
+
+    '/admin/books' => [
+        'GET' => [$bookController, 'index'],
+    ],
+    '/admin/books/store' => [
+        'POST' => [$bookController, 'store'],
+    ],
+    '/admin/books/update' => [
+        'POST' => [$bookController, 'update'],
+    ],
+    '/admin/books/delete' => [
+        'POST' => [$bookController, 'destroy'],
+    ]
 ];
 
 

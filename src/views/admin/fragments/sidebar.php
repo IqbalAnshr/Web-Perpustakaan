@@ -71,37 +71,37 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/admin/crud/books" class="nav-link">
+              <a href="/admin/books" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Books</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/crud/shelves" class="nav-link">
+              <a href="/admin/shelves" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Shelves</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/crud/members" class="nav-link">
+              <a href="/admin/members" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Members</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/crud/borrowings" class="nav-link">
+              <a href="/admin/borrowings" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Borrowings</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/crud/returns" class="nav-link">
+              <a href="/admin/returns" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Returns</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/crud/users" class="nav-link">
+              <a href="/admin/users" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Users</p>
               </a>
