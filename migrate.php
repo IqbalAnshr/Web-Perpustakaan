@@ -57,6 +57,7 @@ $sqlDataBuku = "CREATE TABLE IF NOT EXISTS `Buku` (
     `Jumlah_Total` INT NOT NULL,
     `Jumlah_Tersedia` INT NOT NULL,
     `Status_Pinjam` BOOLEAN DEFAULT FALSE,
+    `Sampul_Path` VARCHAR(255),
     `ID_Rak` INT,
     FOREIGN KEY (`ID_Rak`) REFERENCES `Rak`(`ID_Rak`)
 )";
