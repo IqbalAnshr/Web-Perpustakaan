@@ -15,11 +15,6 @@ class BookController
         $this->conn = $conn;
         $this->bookModel = new BookModel($conn);
 
-        session_start();
-        if (!isset($_SESSION['isLoggedIn']) && !isset($_SESSION['username'])) {
-            header('Location: /admin/login');
-            exit;
-        }
     }
 
 
@@ -217,5 +212,9 @@ class BookController
     }
 
 
+    public function __destruct()
+    {
+        $this->conn->close();
+    }
 
 }

@@ -54,8 +54,5 @@ class HomeController
         include __DIR__ . '/../views/book.php';
     }
 
-    public function __destruct()
-    {
-        $this->conn->close();
-    }
+
 }

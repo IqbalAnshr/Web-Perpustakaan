@@ -13,6 +13,18 @@ $authController = new AuthController($conn);
 $bookController = new BookController($conn);
 
 
+function authMiddleware($callback)
+{
+    return function () use ($callback) {
+        session_start();
+        if (!isset($_SESSION['isLoggedIn']) || !isset($_SESSION['username'])) {
+            header('Location: /admin/login');
+            exit;
+        }
+        return call_user_func($callback);
+    };
+}
+
 $routes = [
     '/' => [
         'GET' => [$homeController, 'index'],
@@ -20,7 +32,7 @@ $routes = [
 
     '/admin/register' => [
         'GET' => [$authController, 'register'],
-        'POST' => [$authController, 'handleRegister'],  
+        'POST' => [$authController, 'handleRegister'],
     ],
     '/admin/login' => [
         'GET' => [$authController, 'login'],
@@ -30,27 +42,22 @@ $routes = [
         'GET' => [$authController, 'logout'],
     ],
     '/admin/dashboard' => [
-        'GET' => function () {
-            session_start();
-            if (!isset($_SESSION['isLoggedIn']) && !isset($_SESSION['username'])) {
-                header('Location: /admin/login');
-                exit;
-            }
+        'GET' => authMiddleware(function () {
             include __DIR__ . '/views/admin/dashboard.php';
-        }
+        }),
     ],
 
     '/admin/books' => [
-        'GET' => [$bookController, 'index'],
+        'GET' => authMiddleware([$bookController, 'index']),
     ],
     '/admin/books/store' => [
-        'POST' => [$bookController, 'store'],
+        'POST' => authMiddleware([$bookController, 'store']),
     ],
     '/admin/books/update' => [
-        'POST' => [$bookController, 'update'],
+        'POST' => authMiddleware([$bookController, 'update']),
     ],
     '/admin/books/delete' => [
-        'POST' => [$bookController, 'destroy'],
+        'POST' => authMiddleware([$bookController, 'destroy']),
     ]
 ];
 
