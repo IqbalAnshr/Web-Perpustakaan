@@ -7,10 +7,12 @@ require_once __DIR__ . '/../config/koneksi.php';
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\BookController;
+use App\Controllers\MemberController;
 
 $homeController = new HomeController($conn);
 $authController = new AuthController($conn);
 $bookController = new BookController($conn);
+$memberController = new MemberController($conn);
 
 
 function authMiddleware($callback)
@@ -58,7 +60,21 @@ $routes = [
     ],
     '/admin/books/delete' => [
         'POST' => authMiddleware([$bookController, 'destroy']),
-    ]
+    ],
+
+    '/admin/members' => [
+        'GET' => authMiddleware([$memberController, 'index']),
+    ],
+    '/admin/members/store' => [
+        'POST' => authMiddleware([$memberController, 'store']),
+    ],
+    '/admin/members/update' => [
+        'POST' => authMiddleware([$memberController, 'update']),
+    ],
+    '/admin/members/delete' => [
+        'POST' => authMiddleware([$memberController, 'destroy']),
+    ],
+    
 ];
 
 
