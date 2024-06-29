@@ -32,6 +32,10 @@ $routes = [
         'GET' => [$homeController, 'index'],
     ],
 
+    '/book' => [
+        'GET' => [$homeController, 'bookSection']
+    ],
+
     '/admin/register' => [
         'GET' => [$authController, 'register'],
         'POST' => [$authController, 'handleRegister'],
@@ -84,10 +88,18 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 if (array_key_exists($requestUri, $routes) && array_key_exists($requestMethod, $routes[$requestUri])) {
     error_log("Route found: " . $requestUri . " [" . $requestMethod . "]");
     call_user_func($routes[$requestUri][$requestMethod]);
+    if ($conn) {
+        $conn->close(); // Close the connection after handling the request
+        $conn = null;
+    }
 } else {
     error_log("Route not found: " . $requestUri . " [" . $requestMethod . "]");
     header("HTTP/1.0 404 Not Found");
     echo 'Page not found';
     echo '<a href="/">Back</a>';
+    if ($conn) {
+        $conn->close(); // Close the connection after handling the request
+        $conn = null;
+    }
 }
 

@@ -1,16 +1,19 @@
 <?php
 
 namespace App\Controllers;
+use App\models\BookModel;
 
 
 
 class HomeController
 {
     private $conn;
+    private $bookModel;
 
     public function __construct($conn)
     {
         $this->conn = $conn;
+        $this->bookModel = new BookModel($conn);
     }
 
     public function index()
@@ -22,34 +25,42 @@ class HomeController
                   GROUP BY b.ISBN 
                   ORDER BY peminjaman DESC 
                   LIMIT 10";
-        
+
+        $query = "SELECT * FROM Buku LIMIT 10";
+
         $result = $this->conn->query($query);
 
         if ($result === FALSE) {
             die("Error: " . $this->conn->error);
         }
 
-        $rekomendasiBuku = $result->fetch_all(MYSQLI_ASSOC);
+        $books = $result->fetch_all(MYSQLI_ASSOC);
 
-        // Include the view file
         include __DIR__ . '/../views/home.php';
     }
 
-    public function bookSection () {
-        if (isset($_POST['search'])) {
-            $search = $_POST['search'];
-            $query = "SELECT * FROM Buku WHERE Judul LIKE '%$search%'";
-        } else {
-            $query = "SELECT * FROM Buku";
-        }
+    public function bookSection()
+    {
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+        $sort = isset($_GET['sort']) ? $_GET['sort'] : 'Judul';
+        $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
+        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+        $limit = 10;
 
-        $result = $this->conn->query($query);
+        $queryString = http_build_query([
+            'search' => $search,
+            'filter' => $filter,
+            'sort' => $sort,
+            'order' => $order,
+        ]);
 
-        if ($result === FALSE) {
-            die("Error: " . $this->conn->error);
-        }
-
-        $buku = $result->fetch_all(MYSQLI_ASSOC);
+        $books = $this->bookModel->getAllBooks($search, $filter, $sort, $order, $page, $limit);
+        $totalBooks = $this->bookModel->getTotalBooks($search, $filter);
+        $totalPages = ceil($totalBooks / $limit);
+        $previousPage = $page - 1;
+        $nextPage = $page + 1;
+        $pages = range(1, $totalPages);
 
         include __DIR__ . '/../views/book.php';
     }

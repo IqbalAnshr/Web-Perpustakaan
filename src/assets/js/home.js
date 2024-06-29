@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
         spaceBetween: 30,
         loop: true,
         breakpoints: {
+            1440: {
+                slidesPerView: 7
+            },
             1024: {
                 slidesPerView: 6
             },

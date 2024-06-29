@@ -15,17 +15,27 @@ class BookModel
     {
         $offset = ($page - 1) * $limit;
 
-        $query = "SELECT b.*, r.Lokasi, r.Kapasitas, r.Kategori, r.Keterangan 
-                  FROM Buku b 
-                  LEFT JOIN Rak r ON b.ID_Rak = r.ID_Rak 
-                  WHERE 1=1";
+        $subQuery = "SELECT ISBN_Buku, COUNT(*) as Total_Peminjaman
+                 FROM Transaksi_Peminjaman
+                 GROUP BY ISBN_Buku";
+
+
+        $query = "SELECT b.*, r.Lokasi, r.Kapasitas, r.Kategori, r.Keterangan, COALESCE(p.Total_Peminjaman, 0) as Total_Peminjaman 
+                    FROM Buku b 
+                    LEFT JOIN Rak r ON b.ID_Rak = r.ID_Rak 
+                    LEFT JOIN ($subQuery) p ON b.ISBN = p.ISBN_Buku 
+                    WHERE 1=1";
 
         if (!empty($search)) {
-            $query .= " AND (b.Judul LIKE '%$search%' OR b.Penulis LIKE '%$search%' OR b.Penerbit LIKE '%$search%')";
+            $query .= " AND (b.ISBN LIKE '%$search%' OR b.Judul LIKE '%$search%' OR b.Penulis LIKE '%$search%' OR b.Penerbit LIKE '%$search%')";
         }
 
         if ($filter) {
-            $query .= " AND r.Kategori = '$filter'";
+            if ($filter == 'Popular') {
+                $query .= " AND p.Total_Peminjaman IS NOT NULL";
+            } else {
+                $query .= " AND r.Kategori = '$filter'";
+            }
         }
 
         $query .= " ORDER BY $sort $order LIMIT $limit OFFSET $offset";
