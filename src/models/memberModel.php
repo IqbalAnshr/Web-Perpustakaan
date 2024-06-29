@@ -11,7 +11,7 @@ class MemberModel
           $this->conn = $conn;
      }
 
-     public function getAllMembers($search = '', $order = 'ASC', $page = 1, $limit = 10)
+     public function getAllMembers($search = '', $sort = 'Nama', $order = 'ASC', $page = 1, $limit = 10)
      {
          $offset = ($page - 1) * $limit;
          
@@ -31,7 +31,7 @@ class MemberModel
          }
          
          // Tambahkan order by dan limit
-         $query .= " ORDER BY Anggota.Nama $order LIMIT ? OFFSET ?";
+         $query .= " ORDER BY $sort $order LIMIT ? OFFSET ?";
          
          // Prepare statement
          $stmt = $this->conn->prepare($query);

@@ -18,6 +18,7 @@ class MemberController
 
      public function index(){
           $search = isset($_GET['search']) ? $_GET['search'] : '';
+          $sort = isset($_GET['sort']) ? $_GET['sort'] : 'Nama';
           $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
           $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
           $limit = 10;
@@ -28,7 +29,7 @@ class MemberController
           ]);
       
           // Mengambil data anggota dan total anggota
-          $members = $this->memberModel->getAllMembers($search, $order, $page, $limit);
+          $members = $this->memberModel->getAllMembers($search, $sort, $order, $page, $limit);
           $totalMembers = $this->memberModel->getTotalMembers($search);
           $totalPages = ceil($totalMembers / $limit);
           $previousPage = $page - 1;
@@ -46,6 +47,7 @@ class MemberController
       
           // Menyertakan file view
           include __DIR__ . '/../views/admin/members/index.php';
+          exit;
       }
       
 
@@ -129,8 +131,4 @@ class MemberController
           exit;
      }
 
-     public function __destruct()
-     {
-         $this->conn->close();
-     }
 }
