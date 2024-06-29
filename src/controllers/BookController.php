@@ -153,6 +153,8 @@ class BookController
             }
 
             move_uploaded_file($sampul_tmp_name, $destination . $filename);
+        }else{
+            $sampul_path = $old_sampul_path;
         }
 
 
@@ -211,10 +213,5 @@ class BookController
         exit;
     }
 
-
-    public function __destruct()
-    {
-        $this->conn->close();
-    }
 
 }
