@@ -8,11 +8,13 @@ use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\BookController;
 use App\Controllers\MemberController;
+use App\Controllers\ReturnController;
 
 $homeController = new HomeController($conn);
 $authController = new AuthController($conn);
 $bookController = new BookController($conn);
 $memberController = new MemberController($conn);
+$returnController = new ReturnController($conn);
 
 
 function authMiddleware($callback)
@@ -78,7 +80,18 @@ $routes = [
     '/admin/members/delete' => [
         'POST' => authMiddleware([$memberController, 'destroy']),
     ],
-    
+    '/admin/returns' => [
+        'GET' => authMiddleware([$returnController, 'index']),
+    ],
+    '/admin/returns/add' => [
+        'POST' => authMiddleware([$returnController, 'add']),
+    ],
+    '/admin/returns/edit' => [
+        'POST' => authMiddleware([$returnController, 'edit']),
+    ],
+    '/admin/returns/delete' => [
+        'POST' => authMiddleware([$returnController, 'delete']),
+    ]
 ];
 
 
