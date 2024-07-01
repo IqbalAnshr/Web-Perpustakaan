@@ -8,13 +8,13 @@ use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\BookController;
 use App\Controllers\MemberController;
-use App\Controllers\ReturnController;
+use App\Controllers\ShelvesController;
 
 $homeController = new HomeController($conn);
 $authController = new AuthController($conn);
 $bookController = new BookController($conn);
 $memberController = new MemberController($conn);
-$returnController = new ReturnController($conn);
+$shelvesController = new ShelvesController($conn);
 
 
 function authMiddleware($callback)
@@ -68,6 +68,19 @@ $routes = [
         'POST' => authMiddleware([$bookController, 'destroy']),
     ],
 
+    '/admin/shelves' => [
+        'GET' => authMiddleware([$shelvesController, 'index']),
+    ],
+    '/admin/shelves/store' => [
+        'POST' => authMiddleware([$shelvesController, 'store']),
+    ],
+    '/admin/shelves/update' => [
+        'POST' => authMiddleware([$shelvesController, 'update']),
+    ],
+    '/admin/shelves/delete' => [
+        'POST' => authMiddleware([$shelvesController, 'destroy']),
+    ],
+
     '/admin/members' => [
         'GET' => authMiddleware([$memberController, 'index']),
     ],
@@ -80,18 +93,7 @@ $routes = [
     '/admin/members/delete' => [
         'POST' => authMiddleware([$memberController, 'destroy']),
     ],
-    '/admin/returns' => [
-        'GET' => authMiddleware([$returnController, 'index']),
-    ],
-    '/admin/returns/add' => [
-        'POST' => authMiddleware([$returnController, 'add']),
-    ],
-    '/admin/returns/edit' => [
-        'POST' => authMiddleware([$returnController, 'edit']),
-    ],
-    '/admin/returns/delete' => [
-        'POST' => authMiddleware([$returnController, 'delete']),
-    ]
+    
 ];
 
 
