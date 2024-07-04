@@ -15,19 +15,39 @@ class ReturnController
 
     public function index()
     {
-        // Pagination logic
-        $perPage = 10; // Items per page
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $totalItems = $this->model->countAllReturns();
-        $totalPages = ceil($totalItems / $perPage);
+        // Get search, filter, sort, and pagination parameters from the query string
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+        $sort = isset($_GET['sort']) ? $_GET['sort'] : 'Tanggal_Pengembalian'; // Default sort column
+        $order = isset($_GET['order']) ? $_GET['order'] : 'ASC'; // Default order
+        $page = isset($_GET['page']) ? (int) $_GET['page'] : 1; // Current page number
+        $limit = 10; // Items per page
+
+        // Fetch data from the model
+        $returns = $this->model->getAllReturns($search, $filter, $sort, $order, $page, $limit);
+        $totalItems = $this->model->countAllReturns($search, $filter);
+        $totalPages = ceil($totalItems / $limit);
         $previousPage = $page > 1 ? $page - 1 : null;
         $nextPage = $page < $totalPages ? $page + 1 : null;
+        $pages = range(1, $totalPages);
 
-        $returns = $this->model->getReturnsByPage($page, $perPage);
+        // Get list of unpaid transactions for the modal
+        $unreturnedTransactions = $this->model->getUnreturnedTransactions();
+
+        // Build the query string for pagination links
+        $queryString = http_build_query([
+            'search' => $search,
+            'filter' => $filter,
+            'sort' => $sort,
+            'order' => $order,
+        ]);
 
         // Pass variables to the view
         include __DIR__ . '/../views/admin/returns/index.php';
     }
+
+
+
 
     public function add()
     {

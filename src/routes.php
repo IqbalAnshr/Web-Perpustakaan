@@ -8,12 +8,14 @@ use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\BookController;
 use App\Controllers\MemberController;
+use App\Controllers\ReturnController;
 use App\Controllers\BorrowingController;
 use App\Controllers\ShelvesController;
 
 $homeController = new HomeController($conn);
 $authController = new AuthController($conn);
 $bookController = new BookController($conn);
+$returnController = new ReturnController($conn);
 $memberController = new MemberController($conn);
 $borrowingController = new BorrowingController($conn);
 $shelvesController = new ShelvesController($conn);
@@ -94,6 +96,18 @@ $routes = [
     ],
     '/admin/members/delete' => [
         'POST' => authMiddleware([$memberController, 'destroy']),
+    ],
+    '/admin/returns' => [
+        'GET' => authMiddleware([$returnController, 'index']),
+    ],
+    '/admin/returns/store' => [
+        'POST' => authMiddleware([$returnController, 'add']),
+    ],
+    '/admin/returns/update' => [
+        'POST' => authMiddleware([$returnController, 'edit']),
+    ],
+    '/admin/returns/delete' => [ 
+        'POST' => authMiddleware([$returnController, 'delete']),
     ],
 
     '/admin/borrowings' => [
