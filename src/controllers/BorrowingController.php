@@ -14,7 +14,6 @@ class BorrowingController
         $this->conn = $conn;
         $this->borrowingModel = new BorrowingModel($conn);
     }
-
     public function index()
     {
         $search = isset($_GET['search']) ? $_GET['search'] : '';
