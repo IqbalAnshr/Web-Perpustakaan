@@ -1,0 +1,357 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* styles.css */
+.navbar {
+  padding: 0.5rem 1rem;
+}
+
+.navbar-brand {
+  font-family: "Arial", sans-serif;
+}
+
+.search {
+  border-radius: 0.25rem 0 0 0.25rem;
+  border: 1px solid #ced4da;
+  height: 2.5rem;
+}
+
+.search:focus {
+  box-shadow: none;
+  border-color: #007bff;
+}
+
+.btn-primary {
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.search::placeholder {
+  color: #555;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.search-container i {
+  color: #555;
+  font-size: 1em;
+}
+
+/* Breadcrumb styling */
+.breadcrumb {
+  background: none;
+  padding: 0;
+}
+
+.breadcrumb-item a {
+  color: #6c757d;
+  text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+  color: #333;
+  font-weight: bold;
+}
+
+#main-container {
+  margin-top: 70px;
+  font-family: "Roboto", sans-serif;
+}
+
+.book-cover,
+.detail-book,
+.borrow-info {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.image {
+  position: relative;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+.image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.image::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  width: 80%;
+  height: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease;
+}
+
+.image:hover img {
+  transform: translateY(-10px);
+}
+
+.image:hover::after {
+  opacity: 0.6;
+}
+
+.detail-book h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #333;
+  border-bottom: 3px solid #6c757d; /* Garis bawah abu tua */
+  padding-bottom: 10px;
+}
+
+.detail-book p {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  color: #444; /* Warna teks yang lebih gelap */
+  line-height: 1.7; /* Jarak antar baris yang lebih besar */
+}
+
+.detail-book p strong {
+  color: #333; /* Warna label yang lebih gelap */
+}
+
+.detail-book h4 {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.4rem;
+  color: #6c757d; /* Abu tua untuk heading */
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #6c757d; /* Garis bawah abu tua */
+  padding-bottom: 5px;
+}
+
+.detail-book hr {
+  border: 0;
+  height: 2px;
+  background: #6c757d; /* Garis horizontal abu tua */
+  margin: 20px 0;
+}
+
+.detail-book p:last-of-type {
+  font-style: italic;
+  color: #555; /* Teks sinopsis lebih lembut */
+}
+
+@media (max-width: 768px) {
+  .detail-book h1 {
+    font-size: 2rem;
+  }
+
+  .detail-book p {
+    font-size: 1rem;
+  }
+
+  .detail-book h4 {
+    font-size: 1.2rem;
+  }
+}
+
+.borrow-info {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #ffffff, #f0f8ff);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.borrow-info::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, #007bff, #00d2ff);
+  border-radius: 0 0 10px 10px;
+}
+
+.borrow-info h4 {
+  font-family: "Merriweather", serif;
+  color: #222;
+  margin: 10px 0;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between the icon and text */
+  padding: 10px 15px;
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.borrow-info h4 i {
+  font-size: 1.4rem;
+  color: #007bff;
+}
+
+.borrow-info .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  border-radius: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.borrow-info .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+@media (max-width: 768px) {
+  .borrow-info h4 {
+    font-size: 1rem;
+  }
+
+  .borrow-info .btn-primary {
+    font-size: 0.9rem;
+  }
+}
+
+.book-section {
+  margin-top: 50px 0; /* Jarak antara input pencarian dan bagian rekomendasi buku */
+}
+
+.book-section h2 {
+  font-size: 24px; /* Ukuran font judul */
+  font-weight: 700; /* Ketebalan font */
+  margin-bottom: 20px; /* Jarak bawah judul dan bagian rekomendasi buku */
+  color: #333; /* Warna teks putih */
+  height: auto;
+}
+
+.books-card {
+  position: relative;
+  height: 250px;
+  width: 170px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth hover effects */
+  text-align: center; /* Center-align text */
+}
+
+.books-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+.books-card .dz-media img {
+  height: 250px;
+  width: 170px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+.books-card .dz-content {
+  text-align: center;
+}
+
+.books-card .dz-content .title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 10px 0;
+}
+
+.books-card .dz-content .author {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.hover-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  background-color: #242424;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.books-card:hover .hover-button {
+  opacity: 1;
+  visibility: visible;
+}
+
+.swiper-pagination {
+  bottom: 10px; 
+  text-align: center; /* Center-align pagination */
+}
+
+.swiper-pagination-bullet {
+  background: rgba(36, 36, 36, 0.5); /* Warna bullet pagination */
+  width: 12px; /* Ukuran bullet pagination */
+  height: 12px; /* Ukuran bullet pagination */
+  border-radius: 50%; /* Membuat bullet bulat */
+  opacity: 1; /* Full opacity */
+  transition: background 0.3s ease, transform 0.3s ease; /* Transisi untuk efek */
+}
+
+.swiper-pagination-bullet-active {
+  background: #242424; /* Warna bullet aktif */
+  transform: scale(1.2); /* Efek zoom saat bullet aktif */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #242424; /* Warna tombol navigasi */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Latar belakang tombol navigasi */
+  border-radius: 50%; /* Membuat tombol bulat */
+  width: 44px; /* Lebar tombol */
+  height: 44px; /* Tinggi tombol */
+  display: flex; /* Flex untuk isi tombol */
+  align-items: center; /* Center-align isi tombol */
+  justify-content: center; /* Center-align isi tombol */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bayangan tombol */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* Transisi untuk efek */
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: #242424; /* Latar belakang tombol saat hover */
+  color: #fff; /* Warna ikon tombol saat hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Bayangan lebih gelap saat hover */
+}
+
+/* Ikon navigasi */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px; /* Ukuran ikon */
+}

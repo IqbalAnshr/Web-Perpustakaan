@@ -117,7 +117,7 @@ class BookModel
 
     public function getBookByISBN($isbn)
     {
-        $sql = "SELECT * FROM buku WHERE ISBN = ?";
+        $sql = "SELECT b.*, r.* FROM buku b LEFT JOIN rak r ON b.ID_Rak = r.ID_Rak WHERE ISBN = ?  ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('s', $isbn);
         $stmt->execute();

@@ -42,6 +42,10 @@ $routes = [
         'GET' => [$homeController, 'bookSection']
     ],
 
+    '/book/detail' => [
+        'GET' => [$homeController, 'detailBook']
+    ],
+
     '/admin/register' => [
         'GET' => [$authController, 'register'],
         'POST' => [$authController, 'handleRegister'],

@@ -83,7 +83,7 @@
                                         <img src="<?= htmlspecialchars($book['Sampul_Path'] ? '/public/' . $book['Sampul_Path'] : '/src/assets/images/default.png'); ?>"
                                             alt="book">
                                     </div>
-                                    <button class="hover-button">Pinjam</button>
+                                    <a href="book/detail?isbn=<?= $book['ISBN'] ?>" class="hover-button">Detail</a>
                                 </div>
                             </div>
                         <?php endforeach; ?>

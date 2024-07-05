@@ -164,6 +164,7 @@ body {
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .books-card:hover .hover-button {

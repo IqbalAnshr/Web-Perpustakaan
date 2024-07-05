@@ -82,26 +82,22 @@
                             </a>
                         </li>
                         <li class="mb-1">
-                            <a href="?search=search 2"
-                                class="d-flex align-items-center text-dark text-decoration-none">
+                            <a href="?search=search 2" class="d-flex align-items-center text-dark text-decoration-none">
                                 <i class="fas fa-pen me-2"></i> search 2
                             </a>
                         </li>
                         <li class="mb-1">
-                            <a href="?search=search 3"
-                                class="d-flex align-items-center text-dark text-decoration-none">
+                            <a href="?search=search 3" class="d-flex align-items-center text-dark text-decoration-none">
                                 <i class="fas fa-pen me-2"></i> search 3
                             </a>
                         </li>
                         <li class="mb-1">
-                            <a href="?search=search 4"
-                                class="d-flex align-items-center text-dark text-decoration-none">
+                            <a href="?search=search 4" class="d-flex align-items-center text-dark text-decoration-none">
                                 <i class="fas fa-pen me-2"></i> search 4
                             </a>
                         </li>
                         <li class="mb-1">
-                            <a href="?search=search 5"
-                                class="d-flex align-items-center text-dark text-decoration-none">
+                            <a href="?search=search 5" class="d-flex align-items-center text-dark text-decoration-none">
                                 <i class="fas fa-pen me-2"></i> Penulis 5
                             </a>
                         </li>
@@ -152,7 +148,7 @@
                                     <p class="title"><?= htmlspecialchars(truncateString($book['Judul'])) ?></p>
                                     <p class="author"><?= htmlspecialchars(truncateString($book['Penulis'], 15)) ?></p>
                                 </div>
-                                <button class="hover-button">Pinjam</button>
+                                <a href="book/detail?isbn=<?= $book['ISBN'] ?>" class="hover-button">Detail</a>
                             </div>
                         <?php endforeach; ?>
                     </div>

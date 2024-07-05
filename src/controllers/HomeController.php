@@ -65,5 +65,23 @@ class HomeController
         include __DIR__ . '/../views/book.php';
     }
 
+    public function detailBook( ){
+        $isbn = $_GET['isbn'];
+        $book = $this->bookModel->getBookByISBN($isbn);
+        $books = $this->bookModel->getAllBooks();
+
+        if (!$book) {
+            echo "Buku tidak ditemukan.";
+            exit;
+        }
+
+        // var_dump($book);
+        // exit;
+
+        $search = '';
+
+        include __DIR__ . '/../views/detail-book.php';
+    }
+
 
 }
