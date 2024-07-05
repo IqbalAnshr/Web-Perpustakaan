@@ -114,5 +114,56 @@ class BookModel
 
         return $result;
     }
+
+    public function getBookByISBN($isbn)
+    {
+        $sql = "SELECT * FROM buku WHERE ISBN = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('s', $isbn);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
+    // Metode untuk menambah jumlah buku tersedia
+    public function increaseAvailableQuantity($isbn)
+    {
+        $sql = "UPDATE Buku SET Jumlah_Tersedia = Jumlah_Tersedia + 1 WHERE ISBN = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('s', $isbn);
+        return $stmt->execute();
+    }
+
+    // Metode untuk mengurangi buku tersedia
+    public function decreaseAvailableQuantity($isbn_buku)
+    {
+        $sql = "UPDATE Buku SET Jumlah_Tersedia = Jumlah_Tersedia - 1 WHERE ISBN = ? AND Jumlah_Tersedia > 0";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('s', $isbn_buku);
+        return $stmt->execute();
+    }
+
+    // Metode untuk memeriksa apakah buku tersedia
+    public function isBookAvailable($isbn)
+    {
+        $sql = "SELECT Jumlah_Tersedia FROM Buku WHERE ISBN = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('s', $isbn);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $book = $result->fetch_assoc();
+        return $book['Jumlah_Tersedia'] > 0;
+    }
+
+    public function isBookCanBeBorrowed($isbn)
+    {
+        $sql = "SELECT Status_Pinjam FROM Buku WHERE ISBN = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('s', $isbn);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $book = $result->fetch_assoc();
+        return $book['Status_Pinjam'] == 1;
+    }
 }
 

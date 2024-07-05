@@ -82,13 +82,23 @@ class ReturnModel
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function addReturn($id_pengembalian, $id_peminjaman, $tanggal_pengembalian, $denda)
+    public function addReturn($id_peminjaman, $tanggal_pengembalian, $denda)
     {
-        $sql = "INSERT INTO transaksi_pengembalian (ID_Pengembalian, ID_Peminjaman, Tanggal_Pengembalian, Denda) 
-                VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO transaksi_pengembalian (ID_Peminjaman, Tanggal_Pengembalian, Denda) 
+                VALUES ( ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param('iisd', $id_pengembalian, $id_peminjaman, $tanggal_pengembalian, $denda);
+        $stmt->bind_param('isi', $id_peminjaman, $tanggal_pengembalian, $denda);
+        return $stmt->execute();
+    }
+
+    public function getBorrowingDates($id_peminjaman)
+    {
+        $sql = "SELECT Tanggal_Peminjaman, Tanggal_Jatuh_Tempo FROM transaksi_peminjaman WHERE ID_Peminjaman = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('i', $id_peminjaman);
         $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
 
     public function editReturn($id_pengembalian, $id_peminjaman, $tanggal_pengembalian, $denda)
@@ -104,6 +114,16 @@ class ReturnModel
         $sql = "DELETE FROM transaksi_pengembalian WHERE ID_Pengembalian = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('i', $id_pengembalian);
+        return $stmt->execute();
+    }
+
+    public function getBorrowingIDByReturnID($id_pengembalian)
+    {
+        $sql = "SELECT ID_Peminjaman FROM Transaksi_Pengembalian WHERE ID_Pengembalian = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('i', $id_pengembalian);
         $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc()['ID_Peminjaman'];
     }
 }

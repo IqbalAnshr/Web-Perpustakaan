@@ -175,6 +175,7 @@ include __DIR__ . '/../fragments/sidebar.php';
                                     <!-- Form Delete -->
                                     <form method="POST" action="/admin/returns/delete" class="ml-2"
                                         onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                        <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="id_pengembalian"
                                             value="<?php echo htmlspecialchars($return['ID_Pengembalian']); ?>">
                                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -222,10 +223,6 @@ include __DIR__ . '/../fragments/sidebar.php';
                         <label for="tanggal_pengembalian" class="form-label">Tanggal Pengembalian</label>
                         <input type="date" class="form-control" id="tanggal_pengembalian" name="tanggal_pengembalian"
                             required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="denda" class="form-label">Denda</label>
-                        <input type="number" class="form-control" id="denda" name="denda" required>
                     </div>
                 </div>
                 <div class="modal-footer">

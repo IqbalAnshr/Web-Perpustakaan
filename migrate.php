@@ -72,9 +72,10 @@ if ($conn->query($sqlDataBuku) === TRUE) {
 $sqlTransaksiPeminjaman = "CREATE TABLE IF NOT EXISTS `Transaksi_Peminjaman` (
     `ID_Peminjaman` INT AUTO_INCREMENT PRIMARY KEY,
     `Tanggal_Peminjaman` DATE NOT NULL,
-    `Tanggal_Pengembalian` DATE NOT NULL,
+    `Tanggal_Jatuh_Tempo` DATE NOT NULL,
     `NIM_Anggota` VARCHAR(10),
     `ISBN_Buku` VARCHAR(20),
+    `Status_Pengembalian` BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (`NIM_Anggota`) REFERENCES `Anggota`(`NIM`),
     FOREIGN KEY (`ISBN_Buku`) REFERENCES `Buku`(`ISBN`)
 )";
