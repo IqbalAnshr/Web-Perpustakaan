@@ -45,6 +45,17 @@ $routes = [
     '/book/detail' => [
         'GET' => [$homeController, 'detailBook']
     ],
+    
+    '/book/borrowings/create' => [
+        'GET' => [$homeController, 'borrowingForm'],
+    ],
+    '/book/borrowings/request-verification' => [
+        'POST' =>[$homeController, 'requestVerification'],
+    ],
+    '/book/borrowings/processBorrowing' => [
+        'POST' => [$homeController, 'processBorrowing'],
+    ],
+
 
     '/admin/register' => [
         'GET' => [$authController, 'register'],
@@ -110,7 +121,7 @@ $routes = [
     '/admin/returns/update' => [
         'POST' => authMiddleware([$returnController, 'edit']),
     ],
-    '/admin/returns/delete' => [ 
+    '/admin/returns/delete' => [
         'POST' => authMiddleware([$returnController, 'delete']),
     ],
 
@@ -126,7 +137,7 @@ $routes = [
     '/admin/borrowings/delete' => [
         'POST' => authMiddleware([$borrowingController, 'destroy']),
     ],
-    
+
 ];
 
 

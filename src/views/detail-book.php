@@ -9,9 +9,19 @@
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../src/assets/css/detail_book.css">
 </head>
+
+<?php
+session_start();
+
+if (isset($_GET['unset_session']) && $_GET['unset_session'] === 'true') {
+    unset($_SESSION['message']);
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit();
+}
+?>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
@@ -86,9 +96,11 @@
                         <h4><i class="fas fa-cubes"></i>Jumlah Tersedia:
                             <?= htmlspecialchars($book['Jumlah_Tersedia']) ?>
                         </h4>
-                        <button class="btn btn-primary w-100 mb-2" <?= $book['Status_Pinjam'] != 1 ? 'disabled' : '' ?>>
+                        <a href="/book/borrowings/create?isbn=<?= $book['ISBN'] ?>"
+                            class="btn btn-primary w-100 mb-2 <?= $book['Status_Pinjam'] != 1 ? 'disabled-link' : '' ?>"
+                            <?= $book['Status_Pinjam'] != 1 ? 'aria-disabled="true"' : '' ?>>
                             <i class="fas fa-hand-paper"></i> Pinjam
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -156,8 +168,53 @@
             <!-- Copyright -->
         </footer>
 
+
+        <!-- modal -->
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded-4 shadow-lg">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title" id="successModalLabel">
+                            <i class="fa-solid fa-circle-check me-2"></i>Sukses!
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p class="fs-3 mb-2"><?php echo $_SESSION['message'] ?></p>
+                        <p class="fs-5 text-muted mb-0">
+                            Untuk pengembalian silahkan kunjung operator. Terimakasih dan mohon dikembalikan tepat
+                            waktu.
+                        </p>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-thumbs-up me-2"></i>Tutup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
         <script src="../src/assets/js/detail_book.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const hasMessage = <?php echo json_encode(isset($_SESSION['message'])); ?>;
+                if (hasMessage) {
+                    const modalElement = document.getElementById('successModal');
+                    const modal = new bootstrap.Modal(modalElement);
+                    modal.show();
+
+                    modalElement.addEventListener('hide.bs.modal', function () {
+                        const url = new URL(window.location.href);
+                        url.searchParams.set('unset_session', 'true');
+                        window.location.href = url.toString();
+                    });
+                }
+            });
+        </script>
     </body>
 
 </html>

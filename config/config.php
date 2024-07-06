@@ -19,4 +19,16 @@ return [
         'collation' => 'utf8_unicode_ci',
         'prefix'    => '',
     ],
+    'mail' => [
+        'driver' => $_ENV['MAIL_DRIVER'] ?? 'smtp',
+        'host'  => $_ENV['MAIL_HOST'] ?? 'localhost',
+        'port' => $_ENV['MAIL_PORT'] ?? 1025,
+        'from' => [
+            'address' => $_ENV['MAIL_FROM_ADDRESS'] ?? 'no-reply@localhost.com',
+            'name' => $_ENV['MAIL_FROM_NAME'] ?? 'Perpustakaan Ini',
+        ],
+        'encryption' => $_ENV['MAIL_ENCRYPTION'] ?? null,
+        'username' => $_ENV['MAIL_USERNAME'] ?? null,
+        'password' => $_ENV['MAIL_PASSWORD'] ?? null,
+    ],
 ];
