@@ -12,6 +12,7 @@ use App\Controllers\ReturnController;
 use App\Controllers\BorrowingController;
 use App\Controllers\ShelvesController;
 use App\Controllers\DashboardController;
+use App\Controllers\UserController;
 
 $homeController = new HomeController($conn);
 $authController = new AuthController($conn);
@@ -21,6 +22,7 @@ $memberController = new MemberController($conn);
 $borrowingController = new BorrowingController($conn);
 $shelvesController = new ShelvesController($conn);
 $dashboardController = new DashboardController($conn);
+$userController = new UserController($conn);
 
 
 function authMiddleware($callback)
@@ -138,6 +140,19 @@ $routes = [
         'POST' => authMiddleware([$borrowingController, 'destroy']),
     ],
 
+    '/admin/users' => [
+        'GET' => authMiddleware([$userController, 'index']),
+    ],
+    '/admin/users/store' => [
+        'POST' => authMiddleware([$userController, 'store']),
+    ],
+    '/admin/users/update' => [
+        'POST' => authMiddleware([$userController, 'update']),
+    ],
+    '/admin/users/delete' => [
+        'POST' => authMiddleware([$userController, 'destroy']),
+    ],
+    
 ];
 
 
