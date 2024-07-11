@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+session_start();
 
 class AuthController
 {
@@ -67,7 +68,9 @@ class AuthController
 
 
         if (empty($username) || empty($password)) {
-            header('Location: /admin/login?error=empty');
+            $_SESSION['success'] = false;
+            $_SESSION['message'] = 'Username and Password cant empty';
+            header('Location: /admin/login?error');
             exit;
         }
 
@@ -82,18 +85,23 @@ class AuthController
             $hashed_password_from_db = $user['Password'];
 
             if (password_verify($password, $hashed_password_from_db)) {
-                session_start();
                 $_SESSION['username'] = $username;
                 $_SESSION['isLoggedIn'] = true;
 
                 header('Location: /admin/dashboard');
                 exit;
             } else {
-                header('Location: /admin/login?error=incorrect');
+                $_SESSION['success'] = false;
+                $_SESSION['message'] = "Password Salah";
+                // var_dump($_SESSION);
+                header('Location: /admin/login');
                 exit;
             }
         } else {
-            header('Location: /admin/login?error=incorrect');
+            $_SESSION['success'] = false;
+            $_SESSION['message'] = "Username Tidak Ditemukan";
+            // var_dump($_SESSION);
+            header('Location: /admin/login');
             exit;
         }
     }

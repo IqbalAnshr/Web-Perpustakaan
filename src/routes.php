@@ -28,7 +28,6 @@ $userController = new UserController($conn);
 function authMiddleware($callback)
 {
     return function () use ($callback) {
-        session_start();
         if (!isset($_SESSION['isLoggedIn']) || !isset($_SESSION['username'])) {
             header('Location: /admin/login');
             exit;
@@ -49,12 +48,12 @@ $routes = [
     '/book/detail' => [
         'GET' => [$homeController, 'detailBook']
     ],
-    
+
     '/book/borrowings/create' => [
         'GET' => [$homeController, 'borrowingForm'],
     ],
     '/book/borrowings/request-verification' => [
-        'POST' =>[$homeController, 'requestVerification'],
+        'POST' => [$homeController, 'requestVerification'],
     ],
     '/book/borrowings/processBorrowing' => [
         'POST' => [$homeController, 'processBorrowing'],
@@ -152,7 +151,7 @@ $routes = [
     '/admin/users/delete' => [
         'POST' => authMiddleware([$userController, 'destroy']),
     ],
-    
+
 ];
 
 
