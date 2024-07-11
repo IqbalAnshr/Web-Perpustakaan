@@ -168,6 +168,10 @@ include __DIR__ . '/../fragments/sidebar.php';
                                                             value="<?php echo $buku['Tahun_Terbit']; ?>">
                                                     </div>
                                                     <div class="mb-3">
+                                                        <label for="sinopsis"class="form-label">Sinopsis</label>
+                                                        <textarea name="sinopsis" id="sinopsis" class="form-control"><?php echo $buku['Sinopsis']; ?></textarea>
+                                                    </div>
+                                                    <div class="mb-3">
                                                         <label for="jumlah_total" class="form-label">Jumlah Total</label>
                                                         <input type="number" class="form-control" id="jumlah_total"
                                                             name="jumlah_total" required
@@ -237,6 +241,12 @@ include __DIR__ . '/../fragments/sidebar.php';
                                                 <div class="img-container d-flex justify-content-center">
                                                     <img src="<?php echo $buku['Sampul_Path'] ? htmlspecialchars('/../public/' . $buku['Sampul_Path']) : '/../src/assets/images/default.png'; ?>"
                                                         alt="Cover Buku" class="img-fluid" style="max-width: 200px;">
+                                                </div>
+                                                <div class="mt-2 table-bordered p-2">
+                                                    <p class="text-lg">Sinopsis :</p>
+                                                    <p class="text-lg">
+                                                        <?php echo htmlspecialchars($buku['Sinopsis']); ?>
+                                                    </p>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -311,6 +321,10 @@ include __DIR__ . '/../fragments/sidebar.php';
                         <input type="text" class="form-control" id="penerbit" name="penerbit" required>
                     </div>
                     <div class="mb-3">
+                        <label for="sinopsis" class="form-label">Sinopsis</label>
+                        <textarea name="sinopsis" id="sinopsis" class="form-control"></textarea>
+                    </div>
+                    <div class="mb-3">
                         <label for="tahun_terbit" class="form-label">Tahun Terbit</label>
                         <input type="number" class="form-control" id="tahun_terbit" name="tahun_terbit" required>
                     </div>
@@ -325,8 +339,8 @@ include __DIR__ . '/../fragments/sidebar.php';
                     <div class="mb-3">
                         <label for="status_pinjam" class="form-label">Status Pinjam</label>
                         <select class="form-select" id="status_pinjam" name="status_pinjam" required>
-                            <option value="1">Dipinjam</option>
-                            <option value="0">Tersedia</option>
+                            <option value="1">Dapat Dipinjam</option>
+                            <option value="0">Tidak Dapat Dipinjam</option>
                         </select>
                     </div>
                     <div class="mb-3">

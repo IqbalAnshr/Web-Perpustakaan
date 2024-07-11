@@ -72,17 +72,18 @@ class BookModel
     }
 
 
-    public function insertBook($isbn, $judul, $penulis, $penerbit, $tahun_terbit, $jumlah_total, $jumlah_tersedia, $status_pinjam, $sampul_path, $id_rak)
+    public function insertBook($isbn, $judul, $penulis, $penerbit, $tahun_terbit, $sinopsis, $jumlah_total, $jumlah_tersedia, $status_pinjam, $sampul_path, $id_rak)
     {
-        $sql = "INSERT INTO buku (ISBN, Judul, Penulis, Penerbit, Tahun_Terbit, Jumlah_Total, Jumlah_Tersedia, Status_Pinjam, Sampul_Path, ID_Rak) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ssssiiiiss", $isbn, $judul, $penulis, $penerbit, $tahun_terbit, $jumlah_total, $jumlah_tersedia, $status_pinjam, $sampul_path, $id_rak);
+        $query = "INSERT INTO buku (isbn, judul, penulis, penerbit, tahun_terbit, sinopsis, jumlah_total, jumlah_tersedia, status_pinjam, sampul_path, id_rak)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param('ssssssiiiss', $isbn, $judul, $penulis, $penerbit, $tahun_terbit, $sinopsis, $jumlah_total, $jumlah_tersedia, $status_pinjam, $sampul_path, $id_rak);
         $result = $stmt->execute();
 
         return $result;
     }
 
-    public function updateBook($isbn_baru, $isbn_lama, $judul, $penulis, $penerbit, $tahun_terbit, $jumlah_total, $jumlah_tersedia, $status_pinjam, $sampul_path, $id_rak)
+    public function updateBook($isbn_baru, $isbn_lama, $judul, $penulis, $penerbit, $tahun_terbit, $sinopsis, $jumlah_total, $jumlah_tersedia, $status_pinjam, $sampul_path, $id_rak)
     {
         $stmt = $this->conn->prepare("UPDATE buku SET
             ISBN = ?,
@@ -90,6 +91,7 @@ class BookModel
             Penulis = ?,
             Penerbit = ?,
             Tahun_Terbit = ?,
+            Sinopsis = ?,
             Jumlah_Total = ?,
             Jumlah_Tersedia = ?,
             Status_Pinjam = ?,
@@ -98,12 +100,13 @@ class BookModel
             WHERE ISBN = ?");
 
         // Bind parameters
-        $stmt->bind_param("sssssssssss", $isbn_baru, $judul, $penulis, $penerbit, $tahun_terbit, $jumlah_total, $jumlah_tersedia, $status_pinjam, $sampul_path, $id_rak, $isbn_lama);
+        $stmt->bind_param("ssssssssssss", $isbn_baru, $judul, $penulis, $penerbit, $tahun_terbit, $sinopsis, $jumlah_total, $jumlah_tersedia, $status_pinjam, $sampul_path, $id_rak, $isbn_lama);
 
         $result = $stmt->execute();
 
         return $result;
     }
+
 
     public function deleteBook($isbn)
     {

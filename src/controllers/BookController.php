@@ -52,12 +52,13 @@ class BookController
         $penulis = $_POST['penulis'];
         $penerbit = $_POST['penerbit'];
         $tahun_terbit = $_POST['tahun_terbit'];
+        $sinopsis = $_POST['sinopsis'];
         $jumlah_total = $_POST['jumlah_total'];
         $jumlah_tersedia = $_POST['jumlah_tersedia'];
         $status_pinjam = $_POST['status_pinjam'];
         $id_rak = $_POST['id_rak'];
 
-        if (empty($isbn) || empty($judul) || empty($penulis) || empty($penerbit) || empty($tahun_terbit) || empty($jumlah_total) || empty($status_pinjam) || empty($id_rak)) {
+        if (empty($isbn) || empty($judul) || empty($penulis) || empty($penerbit) || empty($tahun_terbit) || empty($sinopsis) || empty($jumlah_total) || empty($jumlah_tersedia) || empty($status_pinjam) || empty($id_rak)) {
             $success = false;
             $message = "Harap lengkapi semua kolom";
             $_SESSION['message'] = $message;
@@ -88,7 +89,7 @@ class BookController
         }
 
 
-        $result = $this->bookModel->insertBook($isbn, $judul, $penulis, $penerbit, $tahun_terbit, $jumlah_total, $jumlah_tersedia, $status_pinjam, $sampul_path, $id_rak);
+        $result = $this->bookModel->insertBook($isbn, $judul, $penulis, $penerbit, $tahun_terbit, $sinopsis, $jumlah_total, $jumlah_tersedia, $status_pinjam, $sampul_path, $id_rak);
 
         $_SESSION['success'] = $result;
         $_SESSION['message'] = $result ? "Buku ditambahkan" : "Terjadi kesalahan: " . $this->conn->error;
@@ -117,6 +118,7 @@ class BookController
         $judul = $_POST['judul'];
         $penulis = $_POST['penulis'];
         $penerbit = $_POST['penerbit'];
+        $sinopsis = $_POST['sinopsis'];
         $tahun_terbit = $_POST['tahun_terbit'];
         $jumlah_total = $_POST['jumlah_total'];
         $jumlah_tersedia = $_POST['jumlah_tersedia'];
@@ -158,7 +160,7 @@ class BookController
         }
 
 
-        $result = $this->bookModel->updateBook($isbn_baru, $isbn_lama, $judul, $penulis, $penerbit, $tahun_terbit, $jumlah_total, $jumlah_tersedia, $status_pinjam, $sampul_path, $id_rak);
+        $result = $this->bookModel->updateBook($isbn_baru, $isbn_lama, $judul, $penulis, $penerbit, $tahun_terbit, $sinopsis, $jumlah_total, $jumlah_tersedia, $status_pinjam, $sampul_path, $id_rak);
 
         if ($result === FALSE) {
             $message = "Terjadi kesalahan: " . $this->conn->error;
