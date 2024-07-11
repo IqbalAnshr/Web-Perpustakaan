@@ -16,7 +16,7 @@ Web ini dikembangkan sebagai bagian dari tugas mata kuliah Web Programming
 ## Teknologi yang Digunakan
 
 - **Backend**: PHP, MySQL
-- **Frontend**: HTML, CSS, JavaScript
+- **Frontend**: HTML, CSS, JavaScript, Bootstrap
 
 ## Cara Install
 
@@ -94,6 +94,14 @@ Akses aplikasi di [http://localhost:8000](http://localhost:8000)
 ### Cara Menggunakan Mailhog
 
 Jika Anda menggunakan Mailhog, Anda bisa mengakses Mailhog di [http://localhost:8025](http://localhost:8025) untuk melihat email yang dikirim selama pengujian. Anda tidak perlu mengatur variabel `MAIL_` di file `.env` jika menggunakan Mailhog.
+
+## Akses Ke Dashboard Admin
+Akses Route Berikut
+```bash
+http://localhost:8000/admin/login
+```
+- **Username** : admin
+- **Password** : admin123
 
 ## Kontak / Anggota
 
