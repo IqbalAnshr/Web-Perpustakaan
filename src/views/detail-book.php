@@ -58,7 +58,7 @@ if (isset($_GET['unset_session']) && $_GET['unset_session'] === 'true') {
                 <div class="col-md-3">
                     <div class="book-cover">
                         <div class="image mb-4">
-                            <img src="<?= htmlspecialchars('/../public/' . $book['Sampul_Path']) ?>" alt="book"
+                            <img src="<?= $book['Sampul_Path'] ? htmlspecialchars('/public/' . $book['Sampul_Path']) : '/src/assets/images/default.png'; ?>" alt="book"
                                 class="img-fluid">
                         </div>
                     </div>
@@ -75,11 +75,7 @@ if (isset($_GET['unset_session']) && $_GET['unset_session'] === 'true') {
                         <p><strong>Keterangan:</strong> <?= htmlspecialchars($book['Keterangan']) ?></p>
 
                         <h4>Sinopsis</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id arcu aliquet, elementum
-                            nisi quis, condimentum nibh. Proin sed velit auctor, ullamcorper nisl nec, auctor odio.
-                            Integer fermentum nisl vel eros facilisis posuere. Cras ac ligula mi. Nulla ac enim odio.
-                            Sed varius viverra ornare. Nulla facilisi. Duis sed sem purus. Integer dictum nisi vitae
-                            arcu varius ultricies. Curabitur eget ante malesuada, luctus nulla at, efficitur ex.</p>
+                        <p> <?= htmlspecialchars($book['Sinopsis']) ?></p>
                     </div>
                 </div>
 

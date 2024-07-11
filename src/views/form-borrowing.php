@@ -14,7 +14,6 @@
 
 <body>
     <?php
-    session_start();
     if (isset($_GET['clear_verification']) && $_GET['clear_verification'] === 'true') {
         unset($_SESSION['kode_verifikasi']);
         unset($_SESSION['kode_verifikasi_timestamp']);

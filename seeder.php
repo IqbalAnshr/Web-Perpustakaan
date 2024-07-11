@@ -54,21 +54,22 @@ if ($conn->query($sqlRakSeed) === TRUE) {
 }
 
 // Seeder untuk tabel Buku
-$sqlBukuSeed = "INSERT INTO Buku (ISBN, Judul, Penulis, Penerbit, Tahun_Terbit, Jumlah_Total, Jumlah_Tersedia, Status_Pinjam, Sampul_Path, ID_Rak)
+$sqlBukuSeed = "INSERT INTO Buku (ISBN, Judul, Penulis, Penerbit, Tahun_Terbit, Sinopsis, Jumlah_Total, Jumlah_Tersedia, Status_Pinjam, Sampul_Path, ID_Rak)
 VALUES
-  ('1234567890123', 'The Lord of the Rings', 'J.R.R. Tolkien', 'Allen & Unwin', 1954, 5, 5, FALSE, NULL, 1),
-  ('9876543210987', 'The Hobbit', 'J.R.R. Tolkien', 'Allen & Unwin', 1937, 3, 3, FALSE, NULL, 1),
-  ('0123456789012', 'Pride and Prejudice', 'Jane Austen', 'Penguin Books', 1813, 8, 6, FALSE, NULL, 2),
-  ('7894561230456', 'To Kill a Mockingbird', 'Harper Lee', 'HarperCollins', 1960, 10, 8, FALSE, NULL, 3),
-  ('3456789012345', 'The Catcher in the Rye', 'J.D. Salinger', 'Little, Brown and Company', 1951, 7, 5, FALSE, NULL, 3),
-  ('6789012345678', '1984', 'George Orwell', 'Secker & Warburg', 1949, 6, 4, FALSE, NULL, 4),
-  ('9012345678901', 'Animal Farm', 'George Orwell', 'Secker & Warburg', 1945, 9, 7, FALSE, NULL, 4),
-  ('2345678901234', 'Brave New World', 'Aldous Huxley', 'Chatto & Windus', 1932, 12, 10, FALSE, NULL, 4),
-  ('5678901234567', 'The Great Gatsby', 'F. Scott Fitzgerald', 'Charles Scribners Sons', 1925, 8, 6, FALSE, NULL, 5),
-  ('8901234567890', 'One Hundred Years of Solitude', 'Gabriel García Márquez', 'Editorial Sudamericana', 1967, 15, 12, FALSE, NULL, 5),
-  ('1234567890122', 'The Grapes of Wrath', 'John Steinbeck', 'Viking Press', 1939, 11, 9, FALSE, NULL, 6),
-  ('4567890123456', 'Invisible Man', 'Ralph Ellison', 'Random House', 1952, 9, 7, FALSE, NULL, 6),
-  ('7890123456789', 'Beloved', 'Toni Morrison', 'Alfred A. Knopf', 1987, 14, 11, FALSE, NULL, 6)";
+  ('1234567890123', 'The Lord of the Rings', 'J.R.R. Tolkien', 'Allen & Unwin', 1954, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.', 5, 5, FALSE, NULL, 1),
+  ('9876543210987', 'The Hobbit', 'J.R.R. Tolkien', 'Allen & Unwin', 1937, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 3, 3, FALSE, NULL, 1),
+  ('0123456789012', 'Pride and Prejudice', 'Jane Austen', 'Penguin Books', 1813, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.', 8, 6, TRUE, NULL, 2),
+  ('7894561230456', 'To Kill a Mockingbird', 'Harper Lee', 'HarperCollins', 1960, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.', 10, 8, FALSE, NULL, 3),
+  ('3456789012345', 'The Catcher in the Rye', 'J.D. Salinger', 'Little, Brown and Company', 1951, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.', 7, 5, TRUE, NULL, 3),
+  ('6789012345678', '1984', 'George Orwell', 'Secker & Warburg', 1949, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.', 6, 4, FALSE, NULL, 4),
+  ('9012345678901', 'Animal Farm', 'George Orwell', 'Secker & Warburg', 1945, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.', 9, 7, TRUE, NULL, 4),
+  ('2345678901234', 'Brave New World', 'Aldous Huxley', 'Chatto & Windus', 1932, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.', 12, 10, FALSE, NULL, 4),
+  ('5678901234567', 'The Great Gatsby', 'F. Scott Fitzgerald', 'Charles Scribners Sons', 1925, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae.', 8, 6, TRUE, NULL, 5),
+  ('8901234567890', 'One Hundred Years of Solitude', 'Gabriel García Márquez', 'Editorial Sudamericana', 1967, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Itaque earum rerum hic tenetur a sapiente delectus.', 15, 12, FALSE, NULL, 5),
+  ('1234567890122', 'The Grapes of Wrath', 'John Steinbeck', 'Viking Press', 1939, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', 11, 9, TRUE, NULL, 6),
+  ('4567890123456', 'Invisible Man', 'Ralph Ellison', 'Random House', 1952, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.', 9, 7, FALSE, NULL, 6),
+  ('7890123456789', 'Beloved', 'Toni Morrison', 'Alfred A. Knopf', 1987, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.', 14, 11, TRUE, NULL, 6)";
+
 
 if ($conn->query($sqlBukuSeed) === TRUE) {
     echo "Data Buku berhasil di-seed.<br>";
