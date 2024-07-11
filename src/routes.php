@@ -11,6 +11,7 @@ use App\Controllers\MemberController;
 use App\Controllers\ReturnController;
 use App\Controllers\BorrowingController;
 use App\Controllers\ShelvesController;
+use App\Controllers\DashboardController;
 
 $homeController = new HomeController($conn);
 $authController = new AuthController($conn);
@@ -19,6 +20,7 @@ $returnController = new ReturnController($conn);
 $memberController = new MemberController($conn);
 $borrowingController = new BorrowingController($conn);
 $shelvesController = new ShelvesController($conn);
+$dashboardController = new DashboardController($conn);
 
 
 function authMiddleware($callback)
@@ -69,9 +71,7 @@ $routes = [
         'GET' => [$authController, 'logout'],
     ],
     '/admin/dashboard' => [
-        'GET' => authMiddleware(function () {
-            include __DIR__ . '/views/admin/dashboard.php';
-        }),
+        'GET' => authMiddleware([$dashboardController, 'index']),
     ],
 
     '/admin/books' => [
