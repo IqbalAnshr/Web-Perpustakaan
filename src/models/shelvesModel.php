@@ -58,7 +58,7 @@ class ShelvesModel
     {
         $sql = "INSERT INTO rak ( Lokasi, Kapasitas, Kategori, Keterangan) VALUES ( ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("siss",$lokasi, $kapasitas, $kategori, $keterangan);
+        $stmt->bind_param("siss", $lokasi, $kapasitas, $kategori, $keterangan);
         $result = $stmt->execute();
 
         return $result;
@@ -84,4 +84,3 @@ class ShelvesModel
         return $result;
     }
 }
-?>

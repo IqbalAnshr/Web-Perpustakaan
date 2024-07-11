@@ -10,12 +10,12 @@ include __DIR__ . '/../fragments/sidebar.php';
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Rak</h1>
+                    <h1 class="m-0">Shelves</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Rak</li>
+                        <li class="breadcrumb-item active">Shelves</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -44,7 +44,8 @@ include __DIR__ . '/../fragments/sidebar.php';
                         <select name="sort" class="form-control">
                             <option value="ID_Rak" <?php echo $sort == 'ID_Rak' ? 'selected' : ''; ?>>ID Rak</option>
                             <option value="Lokasi" <?php echo $sort == 'Lokasi' ? 'selected' : ''; ?>>Lokasi</option>
-                            <option value="Kapasitas" <?php echo $sort == 'Kapasitas' ? 'selected' : ''; ?>>Kapasitas</option>
+                            <option value="Kapasitas" <?php echo $sort == 'Kapasitas' ? 'selected' : ''; ?>>Kapasitas
+                            </option>
                             <option value="Kategori" <?php echo $sort == 'Kategori' ? 'selected' : ''; ?>>Kategori
                             </option>
                             <!-- Tambahkan opsi sorting lain sesuai kebutuhan -->
@@ -130,16 +131,17 @@ include __DIR__ . '/../fragments/sidebar.php';
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                <input type="hidden" name="id_rak" value="<?php echo $shelve['ID_Rak']; ?>">
+                                                    <input type="hidden" name="id_rak" value="<?php echo $shelve['ID_Rak']; ?>">
                                                     <div class="mb-3">
                                                         <label for="lokasi" class="form-label">Lokasi</label>
-                                                        <input type="text" class="form-control" id="lokasi" name="lokasi" required
-                                                            value="<?php echo $shelve['Lokasi']; ?>">
+                                                        <input type="text" class="form-control" id="lokasi" name="lokasi"
+                                                            required value="<?php echo $shelve['Lokasi']; ?>">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="kapasitas" class="form-label">Kapasitas</label>
-                                                        <input type="number" class="form-control" id="kapasitas" name="kapasitas"
-                                                            required value="<?php echo $shelve['Kapasitas']; ?>">
+                                                        <input type="number" class="form-control" id="kapasitas"
+                                                            name="kapasitas" required
+                                                            value="<?php echo $shelve['Kapasitas']; ?>">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="kategori" class="form-label">Kategori</label>
@@ -148,9 +150,11 @@ include __DIR__ . '/../fragments/sidebar.php';
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="keterangan" class="form-label">Keterangan</label>
-                                                        <textarea class="form-control" id="keterangan" name="keterangan" required><?php echo $shelve['Keterangan']; ?></textarea>
+                                                        <textarea class="form-control" id="keterangan" name="keterangan"
+                                                            required><?php echo $shelve['Keterangan']; ?></textarea>
                                                     </div>
-                                                    <input type="hidden" name="id_rak_lama" value="<?php echo $shelve['ID_Rak']; ?>">
+                                                    <input type="hidden" name="id_rak_lama"
+                                                        value="<?php echo $shelve['ID_Rak']; ?>">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -187,7 +191,8 @@ include __DIR__ . '/../fragments/sidebar.php';
                             </a></li>
                     <?php endfor; ?>
                     <?php if ($nextPage <= $totalPages): ?>
-                        <li class="page-item"><a class="page-link" href="?page=<?= $nextPage ?>&<?= $queryString ?>">Next</a></li>
+                        <li class="page-item"><a class="page-link"
+                                href="?page=<?= $nextPage ?>&<?= $queryString ?>">Next</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
@@ -196,46 +201,47 @@ include __DIR__ . '/../fragments/sidebar.php';
 
 </div>
 
-            <!-- modal form tambah rak -->
-            <div class="modal fade" id="modalAddRack" tabindex="-1" aria-labelledby="modalAddRackLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form method="POST" action="/admin/shelves/store" enctype="multipart/form-data">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalAddRackLabel">Tambah Rak</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="lokasi" class="form-label">Lokasi</label>
-                                    <input type="text" class="form-control" id="lokasi" name="lokasi" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="kapasitas" class="form-label">Kapasitas</label>
-                                    <input type="number" class="form-control" id="kapasitas" name="kapasitas" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="kategori" class="form-label">Kategori</label>
-                                    <input type="text" class="form-control" id="kategori" name="kategori" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="keterangan" class="form-label">Keterangan</label>
-                                    <textarea class="form-control" id="keterangan" name="keterangan" required></textarea>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" value="submit" name="submit">Add rak</button>
-                            </div>
-                        </form>
+<!-- modal form tambah rak -->
+<div class="modal fade" id="modalAddRack" tabindex="-1" aria-labelledby="modalAddRackLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="/admin/shelves/store" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAddRackLabel">Tambah Rak</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="lokasi" class="form-label">Lokasi</label>
+                        <input type="text" class="form-control" id="lokasi" name="lokasi" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="kapasitas" class="form-label">Kapasitas</label>
+                        <input type="number" class="form-control" id="kapasitas" name="kapasitas" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategori" class="form-label">Kategori</label>
+                        <input type="text" class="form-control" id="kategori" name="kategori" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="keterangan" class="form-label">Keterangan</label>
+                        <textarea class="form-control" id="keterangan" name="keterangan" required></textarea>
                     </div>
                 </div>
-            </div>
-            <!-- end of modal form tambah rak -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" value="submit" name="submit">Add rak</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+<!-- end of modal form tambah rak -->
 
-<?php include __DIR__ . '/../fragments/footer.php'; ?>
+
+<?php
+include __DIR__ . '/../fragments/control_sidebar.php';
+include __DIR__ . '/../fragments/footer.php';
+?>
