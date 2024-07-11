@@ -24,12 +24,10 @@ include __DIR__ . '/../fragments/sidebar.php';
             <form method="GET" action="" class="mb-4">
                 <div class="row">
                     <div class="col-md-4">
-                        <input type="text" name="search" class="form-control" placeholder="Cari pengembalian..."
-                            value="<?php echo htmlspecialchars($search); ?>">
+                        <input type="text" name="search" class="form-control" placeholder="Cari pengembalian..." value="<?php echo htmlspecialchars($search); ?>">
                     </div>
                     <div class="col-md-4">
-                        <input type="date" name="filter" class="form-control"
-                            value="<?php echo htmlspecialchars($filter); ?>">
+                        <input type="date" name="filter" class="form-control" value="<?php echo htmlspecialchars($filter); ?>">
                     </div>
                     <div class="col-md-2">
                         <select name="sort" class="form-control">
@@ -65,7 +63,7 @@ include __DIR__ . '/../fragments/sidebar.php';
             <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalAddReturn">
                 Tambah Pengembalian
             </button>
-            <?php if (isset($_SESSION['message']) && isset($_SESSION['success']) && $_SESSION['success'] == true): ?>
+            <?php if (isset($_SESSION['message']) && isset($_SESSION['success']) && $_SESSION['success'] == true) : ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <?php echo htmlspecialchars($_SESSION['message']); ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -73,7 +71,7 @@ include __DIR__ . '/../fragments/sidebar.php';
                     </button>
                     <?php unset($_SESSION['message'], $_SESSION['success']); ?>
                 </div>
-            <?php elseif (isset($_SESSION['message']) && isset($_SESSION['success']) && $_SESSION['success'] == false): ?>
+            <?php elseif (isset($_SESSION['message']) && isset($_SESSION['success']) && $_SESSION['success'] == false) : ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <?php echo htmlspecialchars($_SESSION['message']); ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -98,8 +96,8 @@ include __DIR__ . '/../fragments/sidebar.php';
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (!empty($returns)): ?>
-                        <?php foreach ($returns as $return): ?>
+                    <?php if (!empty($returns)) : ?>
+                        <?php foreach ($returns as $return) : ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($return['ID_Pengembalian']); ?></td>
                                 <td><?php echo htmlspecialchars($return['ID_Peminjaman']); ?></td>
@@ -111,61 +109,43 @@ include __DIR__ . '/../fragments/sidebar.php';
                                 <td><?php echo htmlspecialchars($return['ISBN_Buku']); ?></td>
                                 <td class="d-flex justify-content-center align-items-center">
                                     <!-- Tombol Edit -->
-                                    <button type="button" class="btn btn-primary btn-sm mr-2" data-toggle="modal"
-                                        data-target="#modalEditReturn<?php echo $return['ID_Pengembalian']; ?>">
+                                    <button type="button" class="btn btn-primary btn-sm mr-2" data-toggle="modal" data-target="#modalEditReturn<?php echo $return['ID_Pengembalian']; ?>">
                                         Edit
                                     </button>
 
                                     <!-- Modal Edit -->
-                                    <div class="modal fade" id="modalEditReturn<?php echo $return['ID_Pengembalian']; ?>"
-                                        tabindex="-1"
-                                        aria-labelledby="modalEditReturnLabel<?php echo $return['ID_Pengembalian']; ?>"
-                                        aria-hidden="true">
+                                    <div class="modal fade" id="modalEditReturn<?php echo $return['ID_Pengembalian']; ?>" tabindex="-1" aria-labelledby="modalEditReturnLabel<?php echo $return['ID_Pengembalian']; ?>" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <form method="POST" action="/admin/returns/update">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title"
-                                                            id="modalEditReturnLabel<?php echo $return['ID_Pengembalian']; ?>">
+                                                        <h5 class="modal-title" id="modalEditReturnLabel<?php echo $return['ID_Pengembalian']; ?>">
                                                             Edit Pengembalian
                                                         </h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <input type="hidden" name="id_pengembalian"
-                                                            value="<?php echo htmlspecialchars($return['ID_Pengembalian']); ?>">
+                                                        <input type="hidden" name="id_pengembalian" value="<?php echo htmlspecialchars($return['ID_Pengembalian']); ?>">
                                                         <div class="mb-3">
                                                             <label for="id_peminjaman_edit" class="form-label">ID
                                                                 Peminjaman</label>
-                                                            <input type="text" class="form-control" id="id_peminjaman_edit"
-                                                                name="id_peminjaman"
-                                                                value="<?php echo htmlspecialchars($return['ID_Peminjaman']); ?>"
-                                                                required>
+                                                            <input type="text" class="form-control" id="id_peminjaman_edit" name="id_peminjaman" value="<?php echo htmlspecialchars($return['ID_Peminjaman']); ?>" required>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="tanggal_pengembalian_edit" class="form-label">Tanggal
                                                                 Pengembalian</label>
-                                                            <input type="date" class="form-control"
-                                                                id="tanggal_pengembalian_edit" name="tanggal_pengembalian"
-                                                                value="<?php echo htmlspecialchars($return['Tanggal_Pengembalian']); ?>"
-                                                                required>
+                                                            <input type="date" class="form-control" id="tanggal_pengembalian_edit" name="tanggal_pengembalian" value="<?php echo htmlspecialchars($return['Tanggal_Pengembalian']); ?>" required>
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="denda_edit" class="form-label">Denda</label>
-                                                            <input type="number" class="form-control" id="denda_edit"
-                                                                name="denda"
-                                                                value="<?php echo htmlspecialchars($return['Denda']); ?>"
-                                                                required>
+                                                            <input type="number" class="form-control" id="denda_edit" name="denda" value="<?php echo htmlspecialchars($return['Denda']); ?>" required>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary" value="submit"
-                                                            name="submit">Save changes</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary" value="submit" name="submit">Save changes</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -173,17 +153,15 @@ include __DIR__ . '/../fragments/sidebar.php';
                                     </div>
 
                                     <!-- Form Delete -->
-                                    <form method="POST" action="/admin/returns/delete" class="ml-2"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                    <form method="POST" action="/admin/returns/delete" class="ml-2" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                         <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="id_pengembalian"
-                                            value="<?php echo htmlspecialchars($return['ID_Pengembalian']); ?>">
+                                        <input type="hidden" name="id_pengembalian" value="<?php echo htmlspecialchars($return['ID_Pengembalian']); ?>">
                                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
-                    <?php else: ?>
+                    <?php else : ?>
                         <tr>
                             <td colspan="9" class="text-center">Tidak ada data pengembalian.</td>
                         </tr>
@@ -191,7 +169,22 @@ include __DIR__ . '/../fragments/sidebar.php';
                 </tbody>
             </table>
 
-
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <?php if ($previousPage > 0) : ?>
+                        <li class="page-item"><a class="page-link" href="?page=<?= $previousPage ?>&<?= $queryString ?>">Previous</a>
+                        </li>
+                    <?php endif; ?>
+                    <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                        <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>"><a class="page-link" href="?page=<?php echo $i; ?>&<?= $queryString ?>">
+                                <?php echo $i; ?>
+                            </a></li>
+                    <?php endfor; ?>
+                    <?php if ($nextPage <= $totalPages) : ?>
+                        <li class="page-item"><a class="page-link" href="?page=<?= $nextPage ?>&<?= $queryString ?>">Next</a></li>
+                    <?php endif; ?>
+                </ul>
+            </nav>
         </div><!-- /.container-fluid -->
     </div>
 </div>
@@ -212,7 +205,7 @@ include __DIR__ . '/../fragments/sidebar.php';
                         <label for="id_peminjaman" class="form-label">ID Peminjaman</label>
                         <select class="form-control" id="id_peminjaman" name="id_peminjaman" required>
                             <option value="">Pilih ID Peminjaman</option>
-                            <?php foreach ($unreturnedTransactions as $transaction): ?>
+                            <?php foreach ($unreturnedTransactions as $transaction) : ?>
                                 <option value="<?php echo $transaction['ID_Peminjaman']; ?>">
                                     <?php echo htmlspecialchars($transaction['ID_Peminjaman']) . ' - ' . htmlspecialchars($transaction['Judul']) . ' - ' . htmlspecialchars($transaction['NIM']) . ' - ' . htmlspecialchars($transaction['Nama']); ?>
                                 </option>
@@ -221,8 +214,7 @@ include __DIR__ . '/../fragments/sidebar.php';
                     </div>
                     <div class="mb-3">
                         <label for="tanggal_pengembalian" class="form-label">Tanggal Pengembalian</label>
-                        <input type="date" class="form-control" id="tanggal_pengembalian" name="tanggal_pengembalian"
-                            required>
+                        <input type="date" class="form-control" id="tanggal_pengembalian" name="tanggal_pengembalian" required>
                     </div>
                 </div>
                 <div class="modal-footer">

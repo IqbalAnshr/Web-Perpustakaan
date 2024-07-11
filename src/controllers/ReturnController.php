@@ -37,8 +37,8 @@ class ReturnController
         $returns = $this->returnModel->getAllReturns($search, $filter, $sort, $order, $page, $limit);
         $totalItems = $this->returnModel->countAllReturns($search, $filter);
         $totalPages = ceil($totalItems / $limit);
-        $previousPage = $page > 1 ? $page - 1 : null;
-        $nextPage = $page < $totalPages ? $page + 1 : null;
+        $previousPage = $page - 1;
+        $nextPage = $page + 1;
         $pages = range(1, $totalPages);
 
         // Get list of unpaid transactions for the modal
@@ -160,7 +160,7 @@ class ReturnController
         // Kurangi jumlah buku yang tersedia
         $isbn_buku = $this->borrowingModel->getIsbnByBorrowingId($id_peminjaman);
 
-      
+
 
         if (!$this->bookModel->decreaseAvailableQuantity($isbn_buku)) {
             $_SESSION['success'] = false;
@@ -185,7 +185,4 @@ class ReturnController
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     }
-
-
-
 }

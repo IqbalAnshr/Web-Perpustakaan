@@ -27,8 +27,7 @@ include __DIR__ . '/../fragments/sidebar.php';
             <form method="GET" action="" class="mb-4">
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" name="search" class="form-control" placeholder="Cari member..."
-                            value="<?php echo htmlspecialchars($search); ?>">
+                        <input type="text" name="search" class="form-control" placeholder="Cari member..." value="<?php echo htmlspecialchars($search); ?>">
                     </div>
 
                     <div class="col-md-3">
@@ -36,7 +35,7 @@ include __DIR__ . '/../fragments/sidebar.php';
                             <option value="Nama" <?php echo $sort == 'Nama' ? 'selected' : ''; ?>>Nama</option>
                             <option value="Alamat" <?php echo $sort == 'Alamat' ? 'selected' : ''; ?>>Alamat</option>
                             <option value="NIM" <?php echo $sort == 'NIM' ? 'selected' : ''; ?>>NIM</option>
-                                <!-- Tambahkan opsi sorting lain sesuai kebutuhan -->
+                            <!-- Tambahkan opsi sorting lain sesuai kebutuhan -->
                         </select>
                     </div>
 
@@ -59,7 +58,7 @@ include __DIR__ . '/../fragments/sidebar.php';
             <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#modalAddMember">
                 Tambah Member
             </button>
-            <?php if (isset($_SESSION['message']) && isset($_SESSION['success']) && $_SESSION['success'] == true): ?>
+            <?php if (isset($_SESSION['message']) && isset($_SESSION['success']) && $_SESSION['success'] == true) : ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <?php echo htmlspecialchars($_SESSION['message']); ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -67,7 +66,7 @@ include __DIR__ . '/../fragments/sidebar.php';
                     </button>
                     <?php unset($_SESSION['message'], $_SESSION['success']); ?>
                 </div>
-            <?php elseif (isset($_SESSION['message']) && isset($_SESSION['success']) && $_SESSION['success'] == false): ?>
+            <?php elseif (isset($_SESSION['message']) && isset($_SESSION['success']) && $_SESSION['success'] == false) : ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <?php echo htmlspecialchars($_SESSION['message']); ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -89,8 +88,8 @@ include __DIR__ . '/../fragments/sidebar.php';
                 </thead>
 
                 <tbody>
-                    <?php if (!empty($members)): ?>
-                        <?php foreach ($members as $member): ?>
+                    <?php if (!empty($members)) : ?>
+                        <?php foreach ($members as $member) : ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($member['NIM']); ?></td>
                                 <td><?php echo htmlspecialchars($member['Nama']); ?></td>
@@ -98,10 +97,8 @@ include __DIR__ . '/../fragments/sidebar.php';
                                 <td><?php echo htmlspecialchars($member['No_Telepon']); ?></td>
                                 <td><?php echo htmlspecialchars($member['Email']); ?></td>
                                 <td class="d-flex justify-content-center align-items-center">
-                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#modalUpdateMember<?php echo $member['NIM']; ?>">Update</button>
-                                    <form class="m-1" method="POST" action="/admin/members/delete"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus member ini?');">
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalUpdateMember<?php echo $member['NIM']; ?>">Update</button>
+                                    <form class="m-1" method="POST" action="/admin/members/delete" onsubmit="return confirm('Apakah Anda yakin ingin menghapus member ini?');">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="nim" value="<?php echo $member['NIM']; ?>">
                                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -109,14 +106,12 @@ include __DIR__ . '/../fragments/sidebar.php';
 
                                 </td>
                                 <!-- modal form update member -->
-                                <div class="modal fade" id="modalUpdateMember<?php echo $member['NIM']; ?>" tabindex="-1"
-                                    aria-labelledby="modalUpdateMemberLabel<?php echo $member['NIM']; ?>" aria-hidden="true">
+                                <div class="modal fade" id="modalUpdateMember<?php echo $member['NIM']; ?>" tabindex="-1" aria-labelledby="modalUpdateMemberLabel<?php echo $member['NIM']; ?>" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <form method="POST" action="/admin/members/update" enctype="multipart/form-data">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title"
-                                                        id="modalUpdateMemberLabel<?php echo $member['NIM']; ?>">Edit Member
+                                                    <h5 class="modal-title" id="modalUpdateMemberLabel<?php echo $member['NIM']; ?>">Edit Member
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -126,36 +121,28 @@ include __DIR__ . '/../fragments/sidebar.php';
                                                     <input type="hidden" name="nim_lama" value="<?php echo $member['NIM']; ?>">
                                                     <div class="mb-3">
                                                         <label for="nim_baru" class="form-label">NIM</label>
-                                                        <input type="number" class="form-control" id="nim_baru" name="nim_baru"
-                                                            required value="<?php echo $member['NIM']; ?>">
+                                                        <input type="number" class="form-control" id="nim_baru" name="nim_baru" required value="<?php echo $member['NIM']; ?>">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="nama" class="form-label">Nama</label>
-                                                        <input type="text" class="form-control" id="nama" name="nama" required
-                                                            value="<?php echo $member['Nama']; ?>">
+                                                        <input type="text" class="form-control" id="nama" name="nama" required value="<?php echo $member['Nama']; ?>">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="alamat" class="form-label">Alamat</label>
-                                                        <input type="text" class="form-control" id="alamat" name="alamat"
-                                                            required value="<?php echo $member['Alamat']; ?>">
+                                                        <input type="text" class="form-control" id="alamat" name="alamat" required value="<?php echo $member['Alamat']; ?>">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="no_telepon" class="form-label">No Telepon</label>
-                                                        <input type="tel" pattern="[0-9]{10,15}" class="form-control" id="no_telepon" 
-                                                            name="no_telepon" required
-                                                            value="<?php echo $member['No_Telepon']; ?>">
+                                                        <input type="tel" pattern="[0-9]{10,15}" class="form-control" id="no_telepon" name="no_telepon" required value="<?php echo $member['No_Telepon']; ?>">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="email" class="form-label">Email</label>
-                                                        <input type="email" class="form-control" id="email" name="email"
-                                                            required value="<?php echo $member['Email']; ?>">
+                                                        <input type="email" class="form-control" id="email" name="email" required value="<?php echo $member['Email']; ?>">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary" value="submit"
-                                                        name="submit">Save changes</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary" value="submit" name="submit">Save changes</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -165,7 +152,7 @@ include __DIR__ . '/../fragments/sidebar.php';
                                 <!-- end of modal form update book -->
                             </tr>
                         <?php endforeach; ?>
-                    <?php else: ?>
+                    <?php else : ?>
                         <tr>
                             <td colspan="9" class="text-center">Tidak ada data member.</td>
                         </tr>
@@ -174,20 +161,17 @@ include __DIR__ . '/../fragments/sidebar.php';
             </table>
             <nav>
                 <ul class="pagination justify-content-center">
-                    <?php if ($previousPage > 0): ?>
-                        <li class="page-item"><a class="page-link"
-                                href="?page=<?= $previousPage ?>&<?= $queryString ?>">Previous</a>
+                    <?php if ($previousPage > 0) : ?>
+                        <li class="page-item"><a class="page-link" href="?page=<?= $previousPage ?>&<?= $queryString ?>">Previous</a>
                         </li>
                     <?php endif; ?>
-                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                        <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>"><a class="page-link"
-                                href="?page=<?php echo $i; ?>&<?= $queryString ?>">
+                    <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                        <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>"><a class="page-link" href="?page=<?php echo $i; ?>&<?= $queryString ?>">
                                 <?php echo $i; ?>
                             </a></li>
                     <?php endfor; ?>
-                    <?php if ($nextPage <= $totalPages): ?>
-                        <li class="page-item"><a class="page-link"
-                                href="?page=<?= $nextPage ?>&<?= $queryString ?>">Next</a></li>
+                    <?php if ($nextPage <= $totalPages) : ?>
+                        <li class="page-item"><a class="page-link" href="?page=<?= $nextPage ?>&<?= $queryString ?>">Next</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
