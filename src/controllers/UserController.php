@@ -20,31 +20,26 @@ class UserController
     public function index()
     {
         $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+        $sort = isset($_GET['sort']) ? $_GET['sort'] : 'ID_User';
         $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
         $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
         $limit = 10;
 
         $queryString = http_build_query([
             'search' => $search,
-            'order' => $order
+            'filter' => $filter,
+            'sort' => $sort,
+            'order' => $order,
         ]);
 
         // Mengambil data anggota dan total anggota
-        $users = $this->userModel->getAllUsers($search, $order, $page, $limit);
-        $totalUsers = $this->userModel->getTotalUsers($search);
+        $users = $this->userModel->getAllUsers($search, $sort, $order, $page, $limit, $filter);
+        $totalUsers = $this->userModel->getTotalUsers($search, $filter);
         $totalPages = ceil($totalUsers / $limit);
         $previousPage = $page - 1;
         $nextPage = $page + 1;
         $pages = range(1, $totalPages);
-
-        // Memastikan nilai previousPage dan nextPage tidak keluar dari batas halaman
-        if ($previousPage < 1) {
-            $previousPage = 1;
-        }
-
-        if ($nextPage > $totalPages) {
-            $nextPage = $totalPages;
-        }
 
         // Menyertakan file view
         include __DIR__ . '/../views/admin/users/index.php';

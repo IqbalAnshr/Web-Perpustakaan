@@ -11,8 +11,10 @@ class UserModel
         $this->conn = $conn;
     }
 
-    public function getAllUsers($search = '', $order = 'ASC', $page = 1, $limit = 10)
+    public function getAllUsers($search = '', $sort = 'ID_User', $order = 'ASC', $page = 1, $limit = 10, $role = '')
     {
+        $page = (int)$page;
+        $limit = (int)$limit;
         $offset = ($page - 1) * $limit;
 
         // Validasi order by clause
@@ -22,16 +24,22 @@ class UserModel
         }
 
         // SQL dasar
-        $query = "SELECT * FROM User";
+        $query = "SELECT * FROM User WHERE 1=1";
 
         // Tambahkan kondisi pencarian jika ada
         if (!empty($search)) {
             $search = $this->conn->real_escape_string($search); // Menghindari SQL Injection
-            $query .= " WHERE User.Username LIKE '%$search%'";
+            $query .= " AND (User.ID_User LIKE '%$search%' OR User.Username LIKE '%$search%')";
+        }
+
+        // Tambahkan filter role jika ada
+        if (!empty($role)) {
+            $role = $this->conn->real_escape_string($role); // Menghindari SQL Injection
+            $query .= " AND User.Role = '$role'";
         }
 
         // Tambahkan order by dan limit
-        $query .= " ORDER BY User.Username $order LIMIT ? OFFSET ?";
+        $query .= " ORDER BY $sort $order LIMIT ? OFFSET ?";
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -57,13 +65,18 @@ class UserModel
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getTotalUsers($search = '')
+    public function getTotalUsers($search = '', $role = '')
     {
-        $sql = "SELECT COUNT(*) as total FROM User";
+        $sql = "SELECT COUNT(*) as total FROM User WHERE 1=1";
 
         if (!empty($search)) {
             $search = $this->conn->real_escape_string($search);
-            $sql .= " WHERE User.Username LIKE '%$search%'";
+            $sql .= " AND (User.ID_User LIKE '%$search%' OR User.Username LIKE '%$search%')";
+        }
+
+        if (!empty($role)) {
+            $role = $this->conn->real_escape_string($role);
+            $sql .= " AND User.Role = '$role'";
         }
 
         $result = $this->conn->query($sql);
@@ -77,6 +90,7 @@ class UserModel
         return $row['total'];
     }
 
+
     public function insertUser($username, $password, $role)
     {
         $sql = "INSERT INTO user (Username, Password, Role) VALUES ( ?, ?, ?)";
@@ -86,7 +100,8 @@ class UserModel
         return $result;
     }
 
-    public function updateUser($username, $password, $role, $id_user) {
+    public function updateUser($username, $password, $role, $id_user)
+    {
         $query = "UPDATE user SET Username = ?, Role = ?";
 
         // Periksa apakah password diisi

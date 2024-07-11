@@ -29,6 +29,21 @@ include __DIR__ . '/../fragments/sidebar.php';
                     <div class="col-md-4">
                         <input type="text" name="search" class="form-control" placeholder="Cari user..." value="<?php echo htmlspecialchars($search); ?>">
                     </div>
+                    <div class="col-md-3">
+                        <select name="filter" class="form-control">
+                            <option value="" <?php echo $filter == '' ? 'selected' : ''; ?>>All</option>
+                            <option value="admin" <?php echo $filter == 'admin' ? 'selected' : ''; ?>>Admin</option>
+                            <option value="pustakawan" <?php echo $filter == 'pustakawan' ? 'selected' : ''; ?>>Pustakawan</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <select name="sort" class="form-control">
+                            <option value="ID_User" <?php echo $sort == 'ID_User' ? 'selected' : ''; ?>>ID_User</option>
+                            <option value="Username" <?php echo $sort == 'Username' ? 'selected' : ''; ?>>Username</option>
+                            <!-- Tambahkan opsi sorting lain sesuai kebutuhan -->
+                        </select>
+                    </div>
 
                     <div class="col-md-2">
                         <select name="order" class="form-control">
