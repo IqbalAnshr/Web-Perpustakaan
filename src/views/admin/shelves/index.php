@@ -93,6 +93,7 @@ include __DIR__ . '/../fragments/sidebar.php';
                         <th>ID Rak</th>
                         <th>Lokasi</th>
                         <th>Kapasitas</th>
+                        <th>Jumlah Buku</th>
                         <th>Kategori</th>
                         <th>Keterangan</th>
                     </tr>
@@ -104,6 +105,7 @@ include __DIR__ . '/../fragments/sidebar.php';
                                 <td><?php echo htmlspecialchars($shelve['ID_Rak']); ?></td>
                                 <td><?php echo htmlspecialchars($shelve['Lokasi']); ?></td>
                                 <td><?php echo htmlspecialchars($shelve['Kapasitas']); ?></td>
+                                <td><?php echo htmlspecialchars($shelve['JumlahBuku']); ?></td>
                                 <td><?php echo htmlspecialchars($shelve['Kategori']); ?></td>
                                 <td><?php echo htmlspecialchars($shelve['Keterangan']); ?></td>
                                 <td class="d-flex justify-content-center align-items-center">

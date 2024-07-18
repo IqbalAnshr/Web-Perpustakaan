@@ -31,7 +31,7 @@ class ShelvesController
             'order' => $order,
         ]);
 
-        $shelves = $this->shelvesModel->getAllShelves($search, $filter, $sort, $order, $page, $limit);
+        $shelves = $this->shelvesModel->getAllShelvesWithBookCount($search, $filter, $sort, $order, $page, $limit);
         $totalShelves = $this->shelvesModel->getTotalShelves($search, $filter);
         $totalPages = ceil($totalShelves / $limit);
         $previousPage = $page - 1;

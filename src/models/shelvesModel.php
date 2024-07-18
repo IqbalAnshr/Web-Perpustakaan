@@ -36,6 +36,39 @@ class ShelvesModel
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function getAllShelvesWithBookCount($search = '', $filter = '', $sort = 'ID_Rak', $order = 'ASC', $page = 1, $limit = 10)
+    {
+        $offset = ($page - 1) * $limit;
+
+        $query = "
+        SELECT rak.*, COUNT(buku.ISBN) AS JumlahBuku
+        FROM rak
+        LEFT JOIN buku ON rak.ID_Rak = buku.ID_Rak
+        WHERE 1=1";
+
+        if (!empty($search)) {
+            $query .= " AND (rak.ID_Rak LIKE '%$search%' OR Lokasi LIKE '%$search%' OR Kapasitas LIKE '%$search%' OR Kategori LIKE '%$search%' OR Keterangan LIKE '%$search%')";
+        }
+
+        if (!empty($filter)) {
+            $query .= " AND Kategori = '$filter'";
+        }
+
+        $query .= "
+        GROUP BY rak.ID_Rak
+        ORDER BY $sort $order
+        LIMIT $limit OFFSET $offset";
+
+        $result = $this->conn->query($query);
+
+        if ($result === FALSE) {
+            die("Error: " . $this->conn->error);
+        }
+
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
     public function getTotalShelves($search = '', $filter = '')
     {
         $sql = "SELECT COUNT(*) as total FROM rak WHERE 1=1";
